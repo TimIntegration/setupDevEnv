@@ -4,12 +4,12 @@
   become: yes
   package: name={{ item }} state=latest
   with_items:
-    - tmux
     - xbindkeys
     - zsh
     - git
     - curl
     - xclip
+    - xsel
     - fonts-powerline
 
 - name: add ppa that have vim8

@@ -23,7 +23,7 @@
 
     - name: load pyenv into zsh
       blockinfile:
-        path: ~/.zshenv
+        path: ~/.zshrc
         block: |
           export PYENV_ROOT="$HOME/.pyenv"
           export PATH="$PYENV_ROOT/bin:$PATH"
