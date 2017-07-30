@@ -1,0 +1,35 @@
+---
+- hosts: all
+  become: true
+  
+  vars:
+    skip_docker_machine: true
+
+
+  tasks:
+    # https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+    - name: install repo key
+      apt_key:
+        url: "https://download.docker.com/linux/ubuntu/gpg"
+        state: present
+    
+    - name: Add docker repository into sources list.
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+        state: present
+    
+    - name: Install docker binary
+      package:
+        name: docker-ce
+        state: latest
+    
+    - name: similar to sudo usermod -a -G docker $USER
+      # user: name={{ lookup('env', "USER") }} group=docker append=yes
+      shell: sudo usermod -a -G docker {{ lookup('env', "USER") }}
+    
+    # https://docs.docker.com/machine/install-machine/
+    - name: Install docker machine
+      shell: curl -L https://github.com/docker/machine/releases/download/v0.12.1/docker-machine-`uname -s`-`uname -m` >/tmp/docker-machine &&
+        chmod +x /tmp/docker-machine &&
+        sudo cp /tmp/docker-machine /usr/local/bin/docker-machine
+      when: not skip_docker_machine
