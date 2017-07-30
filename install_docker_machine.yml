@@ -22,7 +22,10 @@
       package: name={{ item }} state=latest
       with_items:
         - docker-ce
-        - docker-compose
+    
+    - name: pip install docker-compose because apt version failed
+      # https://github.com/docker/compose/issues/4385
+      shell: pip install --user --upgrade docker-compose
   
     - name: similar to sudo usermod -a -G docker $USER
       # user: name={{ lookup('env', "USER") }} group=docker append=yes
