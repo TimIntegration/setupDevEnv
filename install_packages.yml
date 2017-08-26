@@ -32,7 +32,7 @@
     dest: ~/.oh-my-zsh
 
 - name: change default shell to zsh
-  become: yes
+  # become: yes
   shell: chsh -s /bin/zsh
 
 - name: install zsh-autosuggestions using oh-my-zsh
