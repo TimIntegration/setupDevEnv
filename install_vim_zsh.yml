@@ -20,6 +20,9 @@
   become: yes
   package: name=vim-gtk state=latest
 
+- name: build and install tmux from source
+  shell: install_tmux_build_from_source_Ubuntu.sh
+
 - name: install tmuxp
   # https://pypi.python.org/pypi/tmuxp
   shell: pip install --user tmuxp
