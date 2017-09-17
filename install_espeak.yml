@@ -1,0 +1,8 @@
+- name: Install list of required packages for espeak
+  become: yes
+  package: name={{ item }} state=latest
+  with_items:
+    - xautomation
+    - xbindkeys
+    - xsel
+    - espeak

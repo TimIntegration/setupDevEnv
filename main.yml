@@ -14,7 +14,9 @@
       shell: echo "Install pyenv"
     - include: install_pyenv.yml
 
-
+    - name: setup espeak
+      shell: echo "Install espeak, couldn't get pico"
+    - include: install_espeak.yml
 
   handlers:
     - name: install vim-airline and tmuxline
