@@ -5,3 +5,4 @@ sudo apt-get update
 sudo apt-get install code # or code-insiders
 sudo apt-get install exuberant-ctags
 code --install-extension donjayamanne.python
+sudo update-alternatives --set editor /usr/bin/code
