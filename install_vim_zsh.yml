@@ -11,14 +11,16 @@
     - xsel
     - fonts-powerline
 
-- name: add ppa that have vim8
-  become: yes
-  apt_repository:
-    repo: 'ppa:jonathonf/vim'
 
-- name: install vim-gtk for python3 supports
-  become: yes
-  package: name=vim-gtk state=latest
+# manually build from source
+# - name: add ppa that have vim8
+#   become: yes
+#   apt_repository:
+#     repo: 'ppa:jonathonf/vim'
+
+# - name: install vim-gtk for python3 supports
+#   become: yes
+#   package: name=vim-gtk state=latest
 
 - name: build and install tmux from source
   shell: install_tmux_build_from_source_Ubuntu.sh

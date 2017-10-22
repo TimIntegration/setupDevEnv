@@ -1,7 +1,8 @@
 # https://gist.github.com/P7h/91e14096374075f5316e
 # Steps to build and install tmux from source on Ubuntu.
 # Takes < 25 seconds on EC2 env [even on a low-end config instance].
-VERSION=2.5
+# sudo apt-get install --reinstall build-essential
+VERSION=2.6
 SYS_TMUX_V=$(tmux -V | cut -c 6-)
 if [ "$SYS_TMUX_V" != "$VERSION" ]; then
 sudo apt-get -y remove tmux
