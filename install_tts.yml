@@ -1,5 +1,6 @@
 ---
 - name: Install list of required packages for tts
+  become: yes
   package: name={{ item }} state=latest
   with_items:
     - xautomation
@@ -12,13 +13,15 @@
     - libttspico-utils
 
 - name: Download picospeaker
+  become: yes
   get_url:
     url: https://raw.githubusercontent.com/timle1/picospeaker/master/picospeaker
     dest: /bin/usr
     mode: 0755
 
-- name: Install epub reader to test TTS
-  package: name={{ item }} state=latest
-  with_items:
-    - okular
-    - okular-extra-backends
+# - name: Install epub reader to test TTS
+#   become: yes
+#   package: name={{ item }} state=latest
+#   with_items:
+#     - okular
+#     - okular-extra-backends

@@ -2,21 +2,33 @@
 - hosts: all
   
   vars:
-    skip_dotfiles: true
+    skip_dotfiles: false
     latest_stable_python: 3.6.3
 
   tasks:
-    - name: setup zsh
-      shell: echo "Setup zsh"
-    - include_tasks: install_vim_zsh.yml
-    
-    - name: setup pyenv
-      shell: echo "Install pyenv"
-    - include_tasks: install_pyenv.yml
+  #   - name: setup zsh
+  #     shell: echo "Setup zsh"
+  #   - include_tasks: install_vim_zsh.yml
 
-    - name: setup tts
-      shell: echo "Install tts, pico instead of espeak"
-    - include_tasks: install_tts.yml
+  #   - name: setup tts
+  #     shell: echo "Install tts, pico instead of espeak"
+  #   - include_tasks: install_tts.yml
+    
+  #   - name: setup pip3
+  #     shell: echo "Install pip3 programs"
+  #   - include_tasks: install_pip3_programs.yml
+
+    - name: clone dotfiles
+      git:
+        repo: https://github.com/timle1/dotfiles.git
+        dest: ~/Documents/dotfiles
+      when: not skip_dotfiles
+
+    - name: install dotfiles
+      shell: ~/Documents/dotfiles/makesymlinks.sh
+      when: not skip_dotfiles
+      notify:
+        - install vim-airline and tmuxline
 
   handlers:
     - name: install vim-airline and tmuxline

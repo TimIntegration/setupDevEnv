@@ -23,11 +23,7 @@
 #   package: name=vim-gtk state=latest
 
 - name: build and install tmux from source
-  shell: install_tmux_build_from_source_Ubuntu.sh
-
-- name: install tmuxp
-  # https://pypi.python.org/pypi/tmuxp
-  shell: pip install --user tmuxp
+  shell: ./install_tmux_build_from_source_Ubuntu.sh
 
 - name: install oh-my-zsh to get plugin for zsh
   # https://github.com/robbyrussell/oh-my-zsh
@@ -36,8 +32,8 @@
     dest: ~/.oh-my-zsh
 
 - name: change default shell to zsh
-  # become: yes
-  shell: chsh -s /bin/zsh
+  become: yes
+  shell: chsh -s $(which zsh)
 
 - name: install zsh-autosuggestions using oh-my-zsh
   # https://github.com/zsh-users/zsh-autosuggestions
@@ -62,22 +58,6 @@
     dest: ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
   # add as last plugin in .zshrc plugins=( [plugins...] zsh-syntax-highlighting)
 
-- name: install cheat via pip
-  # https://github.com/chrisallenlane/cheat/wiki/Installing
-  shell: pip install --user cheat
-
-- name: clone dotfiles
-  git:
-    repo: https://github.com/timle1/dotfiles.git
-    dest: ~/Documents/dotfiles
-  when: not skip_dotfiles
-  notify:
-    - install vim-airline and tmuxline
-
-- name: install dotfiles
-  shell: ~/Documents/dotfiles/makesymlinks.sh
-  when: not skip_dotfiles
-
 - name: vim-plug
   # https://github.com/junegunn/vim-plug
   shell: curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -90,4 +70,3 @@
     path: ~/.multisnippet
     state: directory
     mode: 0755
-

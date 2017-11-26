@@ -22,3 +22,4 @@ else
 fi
 ## Logout and login to the shell again and run.
 ## tmux -V
+exit 0

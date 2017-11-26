@@ -1,0 +1,16 @@
+---
+# http://docs.ansible.com/ansible/latest/package_module.html
+- name: Install list of required packages
+  become: yes
+  package: name={{ item }} state=latest
+  with_items:
+    - python3-pip
+
+# sudo chown -R $USER: ~/.local
+- name: install tmuxp
+  # https://pypi.python.org/pypi/tmuxp
+  shell: pip3 install --user tmuxp
+
+- name: install cheat via pip
+  # https://github.com/chrisallenlane/cheat/wiki/Installing
+  shell: pip3 install --user cheat
