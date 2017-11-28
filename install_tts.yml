@@ -13,15 +13,14 @@
     - libttspico-utils
 
 - name: Download picospeaker
-  become: yes
   get_url:
     url: https://raw.githubusercontent.com/timle1/picospeaker/master/picospeaker
-    dest: /bin/usr
+    dest: /tmp/
     mode: 0755
 
-# - name: Install epub reader to test TTS
-#   become: yes
-#   package: name={{ item }} state=latest
-#   with_items:
-#     - okular
-#     - okular-extra-backends
+- name: Install picospeaker
+  become: yes
+  args:
+    chdir: /tmp/
+  shell: install -m 755 picospeaker /usr/bin
+
